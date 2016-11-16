@@ -1,5 +1,10 @@
 var myList = [];
 function addItem(){
+  var searchArray = myList.indexOf(document.getElementById("newItem").value);
+  if (searchArray == -1) {
+    myList.push(document.getElementById("newItem").value);
+    console.log(myList);
+  }
   var input = document.getElementById("newItem").value;
   var list = document.getElementById("listDisplay");
   var item = document.createElement("li");
@@ -13,16 +18,9 @@ function addItem(){
   btnClose.appendChild(iconClose);
   var itemName = document.createTextNode(input);
   btnClose.addEventListener("click", removeParentListItem);
-  item.appendChild(btnClose);
+  
   item.appendChild(itemName);
-
-//  myList.push(document.getElementById("newItem").value);
-//  console.log(myList);
-  var searchArray = myList.indexOf(document.getElementById("newItem").value);
-  if (searchArray == -1) {
-    myList.push(document.getElementById("newItem").value);
-    console.log(myList);
-  }
+  item.appendChild(btnClose);
 
   list.appendChild(item);
   document.getElementById("newItem").value = "";
@@ -32,6 +30,9 @@ function removeParentListItem(){
   var mom = this.parentNode;
   var grandma = mom.parentNode;
   grandma.removeChild(mom);
+  var itemRemove = mom.firstChild.textContent;
+  var itemIndex = myList.indexOf(itemRemove);
+  myList.splice(itemIndex,1);
 }
 
 //courtesy of w3schools, from: http://www.w3schools.com/js/js_cookies.asp
