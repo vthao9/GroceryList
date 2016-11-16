@@ -1,3 +1,4 @@
+var myList = [];
 function addItem(){
   var input = document.getElementById("newItem").value;
   var list = document.getElementById("listDisplay");
@@ -14,6 +15,15 @@ function addItem(){
   btnClose.addEventListener("click", removeParentListItem);
   item.appendChild(btnClose);
   item.appendChild(itemName);
+
+//  myList.push(document.getElementById("newItem").value);
+//  console.log(myList);
+  var searchArray = myList.indexOf(document.getElementById("newItem").value);
+  if (searchArray == -1) {
+    myList.push(document.getElementById("newItem").value);
+    console.log(myList);
+  }
+
   list.appendChild(item);
   document.getElementById("newItem").value = "";
 }
