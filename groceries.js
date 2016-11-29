@@ -1,4 +1,5 @@
 var myList = [];
+var save = "";
 function addItem(){
   var searchArray = myList.indexOf(document.getElementById("newItem").value);
   if (searchArray == -1) {
@@ -18,7 +19,7 @@ function addItem(){
   btnClose.appendChild(iconClose);
   var itemName = document.createTextNode(input);
   btnClose.addEventListener("click", removeParentListItem);
-  
+
   item.appendChild(itemName);
   item.appendChild(btnClose);
 
@@ -33,6 +34,17 @@ function removeParentListItem(){
   var itemRemove = mom.firstChild.textContent;
   var itemIndex = myList.indexOf(itemRemove);
   myList.splice(itemIndex,1);
+}
+
+function saveList(){
+  save = myList.toString();
+  setCookie("storeList",save,1)
+}
+
+function clearList(){
+  document.getElementById("listDisplay").innerHTML = "";
+  var nothing = "";
+  setCookie("storeList",nothing);
 }
 
 //courtesy of w3schools, from: http://www.w3schools.com/js/js_cookies.asp
